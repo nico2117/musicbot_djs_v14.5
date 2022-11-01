@@ -25,13 +25,16 @@ client.player = player;
 
 discordModals(client);
 
-http
+/* http
   .createServer(function (req, res) {
     res.write("I'm alive");
     res.end();
   })
   .listen(8080);
-console.log('request handler registered');
+console.log('request handler registered'); */
+
+const server = require('./server/server');
+server.start();
 
 const commandFiles = fs
   .readdirSync('./commands')
