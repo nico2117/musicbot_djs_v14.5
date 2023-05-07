@@ -1,4 +1,4 @@
-const { GuildMember, MessageEmbed } = require('discord.js');
+const { GuildMember, MessageEmbed, EmbedBuilder } = require('discord.js');
 
 module.exports = {
   name: 'queue',
@@ -31,7 +31,7 @@ module.exports = {
         str.length > max ? `${str.slice(0, max - 3)}...` : str;
       const progress = queue.createProgressBar();
       const perc = queue.getPlayerTimestamp();
-      let npEmbed = new MessageEmbed();
+      let npEmbed = new EmbedBuilder();
       npEmbed.setTitle('Now Playing');
       npEmbed.setDescription(
         trimString(

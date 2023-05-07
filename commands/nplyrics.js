@@ -1,5 +1,5 @@
 const { default: axios } = require('axios');
-const { GuildMember, MessageEmbed } = require('discord.js');
+const { GuildMember, EmbedBuilder } = require('discord.js');
 
 module.exports = {
   name: 'nplyrics',
@@ -48,10 +48,18 @@ module.exports = {
     try {
       const { data } = await axios.get(url.href);
 
+      if (!data) {
+        console.log('Error while looking for lyrics');
+        return interaction.followUp({
+          content:
+            'Sorry but I am not able to find lyrics for that song title!',
+        });
+      }
+
       const embeds = substring(4000, data.lyrics).map((value, index) => {
         const isFirst = index === 0;
 
-        return new MessageEmbed({
+        return new EmbedBuilder({
           title: isFirst ? `${data.title} - ${data.author}` : null,
           thumbnail: isFirst ? { url: data.thumbnail.genius } : null,
           description: value,
